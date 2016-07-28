@@ -24,8 +24,8 @@ import okhttp3.Response;
  */
 
 public class DefaultRssGateway implements RssGateway {
-    private RssXmlParser rssXmlParser;
-    private OkHttpClient client = new OkHttpClient();
+    private final RssXmlParser rssXmlParser;
+    private final OkHttpClient client = new OkHttpClient();
 
     public DefaultRssGateway(RssXmlParser xmlParser) {
         rssXmlParser = xmlParser;

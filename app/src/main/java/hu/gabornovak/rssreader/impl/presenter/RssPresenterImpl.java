@@ -19,10 +19,10 @@ import hu.gabornovak.rssreader.logic.view.RssView;
  */
 
 public class RssPresenterImpl implements RssPresenter {
-    private Context context;
+    private final Context context;
 
     private RssView rssView;
-    private RssInteractor rssInteractor;
+    private final RssInteractor rssInteractor;
 
     public RssPresenterImpl(Context context) {
         rssInteractor = new RssInteractor();

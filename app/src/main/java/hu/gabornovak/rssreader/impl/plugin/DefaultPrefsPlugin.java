@@ -18,8 +18,8 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
     private static final String TAG = "Prefs";
     private static final String VISITED_ITEMS_KEY = "VISITED_ITEMS_KEY";
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences preferences;
+    private final SharedPreferences.Editor editor;
 
     private Set<String> cache;
 
@@ -30,14 +30,12 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
         editor = preferences.edit();
     }
 
-    @Override
-    public void saveStringSet(String key, Set<String> set) {
-        editor.putStringSet(key, set).apply();
+    private void saveStringSet(Set<String> set) {
+        editor.putStringSet(VISITED_ITEMS_KEY, set).apply();
     }
 
-    @Override
-    public Set<String> getStringSet(String key) {
-        return preferences.getStringSet(key, new HashSet<String>());
+    private Set<String> getStringSet() {
+        return preferences.getStringSet(VISITED_ITEMS_KEY, new HashSet<String>());
     }
 
     @Override
@@ -45,7 +43,7 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
         if (cache != null) {
             return cache;
         } else {
-            cache = getStringSet(VISITED_ITEMS_KEY);
+            cache = getStringSet();
         }
         return cache;
     }
@@ -61,13 +59,13 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
 
     private void saveItemVisited(RssItem item) {
         Set<String> urls;
-        Set<String> set = getStringSet(VISITED_ITEMS_KEY);
+        Set<String> set = getStringSet();
         if (set == null) {
             urls = new HashSet<>();
         } else {
             urls = set;
         }
         urls.add(item.getLink());
-        saveStringSet(VISITED_ITEMS_KEY, urls);
+        saveStringSet(urls);
     }
 }

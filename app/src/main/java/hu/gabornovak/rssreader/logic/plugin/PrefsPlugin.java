@@ -9,9 +9,6 @@ import hu.gabornovak.rssreader.logic.model.RssItem;
  */
 
 public interface PrefsPlugin {
-    void saveStringSet(String key, Set<String> set);
-    Set<String> getStringSet(String key);
-
     Set<String> getVisitedRssItems();
     void setItemVisited(RssItem item);
 }

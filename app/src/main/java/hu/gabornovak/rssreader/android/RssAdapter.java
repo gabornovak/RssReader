@@ -18,8 +18,8 @@ import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
 
 
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
-    private RssPresenter presenter;
-    private List<RssItem> items;
+    private final RssPresenter presenter;
+    private final List<RssItem> items;
 
     public RssAdapter(RssPresenter presenter, List<RssItem> items) {
         this.presenter = presenter;
@@ -57,7 +57,7 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
     }
 
     static class RssViewHolder extends RecyclerView.ViewHolder {
-        private ListItemRssBinding viewDataBinding;
+        private final ListItemRssBinding viewDataBinding;
 
         RssViewHolder(ListItemRssBinding viewDataBinding) {
             super(viewDataBinding.getRoot());
