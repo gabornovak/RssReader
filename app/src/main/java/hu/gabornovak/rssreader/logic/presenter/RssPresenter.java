@@ -10,9 +10,9 @@ import hu.gabornovak.rssreader.logic.view.RssView;
 public interface RssPresenter {
     void setView(RssView view);
 
-    void onResume();
     void onStart();
-    void onDestroy();
     void onRefresh();
+
     void onRssItemClick(RssItem item);
+    void onRetryClick();
 }

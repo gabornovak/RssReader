@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 import java.util.Set;
 
+import hu.gabornovak.rssreader.logic.model.RssItem;
 import hu.gabornovak.rssreader.logic.plugin.PrefsPlugin;
 
 /**
@@ -15,9 +16,12 @@ import hu.gabornovak.rssreader.logic.plugin.PrefsPlugin;
 
 public class DefaultPrefsPlugin implements PrefsPlugin {
     private static final String TAG = "Prefs";
+    private static final String VISITED_ITEMS_KEY = "VISITED_ITEMS_KEY";
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+
+    private Set<String> cache;
 
     //Known issue, we call apply async
     @SuppressLint("CommitPrefEdits")
@@ -34,5 +38,36 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
     @Override
     public Set<String> getStringSet(String key) {
         return preferences.getStringSet(key, new HashSet<String>());
+    }
+
+    @Override
+    public Set<String> getVisitedRssItems() {
+        if (cache != null) {
+            return cache;
+        } else {
+            cache = getStringSet(VISITED_ITEMS_KEY);
+        }
+        return cache;
+    }
+
+    //FIXME: We should remove the unused items
+    @Override
+    public void setItemVisited(RssItem item) {
+        if (cache != null) {
+            cache.add(item.getLink());
+        }
+        saveItemVisited(item);
+    }
+
+    private void saveItemVisited(RssItem item) {
+        Set<String> urls;
+        Set<String> set = getStringSet(VISITED_ITEMS_KEY);
+        if (set == null) {
+            urls = new HashSet<>();
+        } else {
+            urls = set;
+        }
+        urls.add(item.getLink());
+        saveStringSet(VISITED_ITEMS_KEY, urls);
     }
 }

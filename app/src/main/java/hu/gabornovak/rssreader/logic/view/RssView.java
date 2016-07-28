@@ -12,4 +12,5 @@ public interface RssView {
     void showProgress();
     void showError(String s);
     void showRssList(List<RssItem> items);
+    void refreshList();
 }

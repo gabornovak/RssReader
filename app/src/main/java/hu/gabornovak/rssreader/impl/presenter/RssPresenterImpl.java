@@ -7,6 +7,7 @@ import android.net.Uri;
 
 import java.util.List;
 
+import hu.gabornovak.rssreader.impl.DefaultPluginProvider;
 import hu.gabornovak.rssreader.impl.gateway.DefaultRssGateway;
 import hu.gabornovak.rssreader.logic.interactor.RssInteractor;
 import hu.gabornovak.rssreader.logic.model.RssItem;
@@ -34,11 +35,6 @@ public class RssPresenterImpl implements RssPresenter {
     }
 
     @Override
-    public void onResume() {
-
-    }
-
-    @Override
     public void onStart() {
         rssView.showProgress();
         getRssFeed();
@@ -51,7 +47,6 @@ public class RssPresenterImpl implements RssPresenter {
 
     @Override
     public void onRssItemClick(RssItem item) {
-        System.out.println("item.getLink() = " + item.getLink());
         Uri uri = Uri.parse(item.getLink());
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -59,12 +54,20 @@ public class RssPresenterImpl implements RssPresenter {
         //TODO Handle the case when we have no browser
         if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
             context.startActivity(intent);
+            setItemVisited(item);
         }
     }
 
     @Override
-    public void onDestroy() {
+    public void onRetryClick() {
+        rssView.showProgress();
+        getRssFeed();
+    }
 
+    private void setItemVisited(RssItem item) {
+        DefaultPluginProvider.INSTANCE.getPrefsPlugin(context).setItemVisited(item);
+        item.setVisited(true);
+        rssView.refreshList();
     }
 
     private void getRssFeed() {

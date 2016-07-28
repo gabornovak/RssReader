@@ -9,6 +9,7 @@ public class RssItem {
     private final String link;
     private final String pubDate;
     private final String imageUrl;
+    private boolean isVisited;
 
     public RssItem(String title, String description, String link, String pubDate, String imageUrl) {
         this.title = title;
@@ -36,5 +37,13 @@ public class RssItem {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setVisited(boolean visited) {
+        isVisited = visited;
     }
 }

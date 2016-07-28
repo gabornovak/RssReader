@@ -4,6 +4,8 @@ package hu.gabornovak.rssreader.android;
  * Created by gnovak on 7/28/2016.
  */
 
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -39,9 +41,18 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
     public void onBindViewHolder(RssViewHolder customViewHolder, int i) {
         ListItemRssBinding viewDataBinding = customViewHolder.getViewDataBinding();
         viewDataBinding.setPresenter(presenter);
-        viewDataBinding.setRssItem(items.get(i));
-        if (items.get(i).getImageUrl() != null) {
-            viewDataBinding.image.setImageURI(items.get(i).getImageUrl());
+        RssItem rssItem = items.get(i);
+        viewDataBinding.setRssItem(rssItem);
+
+        if (rssItem.isVisited()) {
+            ColorMatrix matrix = new ColorMatrix();
+            matrix.setSaturation(0);
+            ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+            viewDataBinding.image.setColorFilter(filter);
+        }
+
+        if (rssItem.getImageUrl() != null) {
+            viewDataBinding.image.setImageURI(rssItem.getImageUrl());
         }
     }
 
