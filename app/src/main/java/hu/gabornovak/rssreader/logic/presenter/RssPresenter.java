@@ -1,5 +1,6 @@
 package hu.gabornovak.rssreader.logic.presenter;
 
+import hu.gabornovak.rssreader.logic.model.RssItem;
 import hu.gabornovak.rssreader.logic.view.RssView;
 
 /**
@@ -12,5 +13,6 @@ public interface RssPresenter {
     void onResume();
     void onStart();
     void onDestroy();
-
+    void onRefresh();
+    void onRssItemClick(RssItem item);
 }

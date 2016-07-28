@@ -1,13 +1,16 @@
 package hu.gabornovak.rssreader.impl.presenter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 
 import java.util.List;
 
-import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
+import hu.gabornovak.rssreader.impl.gateway.DefaultRssGateway;
 import hu.gabornovak.rssreader.logic.interactor.RssInteractor;
 import hu.gabornovak.rssreader.logic.model.RssItem;
-import hu.gabornovak.rssreader.impl.gateway.DefaultRssGateway;
+import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
 import hu.gabornovak.rssreader.logic.view.RssView;
 
 /**
@@ -38,22 +41,43 @@ public class RssPresenterImpl implements RssPresenter {
     @Override
     public void onStart() {
         rssView.showProgress();
-        rssInteractor.downloadRss(context, new DefaultRssGateway.OnRssLoadedListener() {
-            @Override
-            public void onRssLoaded(List<RssItem> items) {
-                rssView.hideProgress();
-                rssView.showRssList(items);
-            }
+        getRssFeed();
+    }
 
-            @Override
-            public void onError(Exception e) {
-                rssView.hideProgress();
-            }
-        });
+    @Override
+    public void onRefresh() {
+        getRssFeed();
+    }
+
+    @Override
+    public void onRssItemClick(RssItem item) {
+        System.out.println("item.getLink() = " + item.getLink());
+        Uri uri = Uri.parse(item.getLink());
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        //TODO Handle the case when we have no browser
+        if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+            context.startActivity(intent);
+        }
     }
 
     @Override
     public void onDestroy() {
 
+    }
+
+    private void getRssFeed() {
+        rssInteractor.downloadRss(context, new DefaultRssGateway.OnRssLoadedListener() {
+            @Override
+            public void onRssLoaded(List<RssItem> items) {
+                rssView.showRssList(items);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                rssView.showError("TODO: Error msg");
+            }
+        });
     }
 }

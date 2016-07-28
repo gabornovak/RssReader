@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NASA RSS Reader</string>
+    <string name="retry">Tap to retry</string>
 </resources>

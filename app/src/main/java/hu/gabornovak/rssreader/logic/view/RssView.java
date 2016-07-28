@@ -10,6 +10,6 @@ import hu.gabornovak.rssreader.logic.model.RssItem;
 
 public interface RssView {
     void showProgress();
-    void hideProgress();
+    void showError(String s);
     void showRssList(List<RssItem> items);
 }

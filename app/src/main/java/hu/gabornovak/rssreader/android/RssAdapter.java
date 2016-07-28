@@ -12,12 +12,15 @@ import java.util.List;
 
 import hu.gabornovak.rssreader.databinding.ListItemRssBinding;
 import hu.gabornovak.rssreader.logic.model.RssItem;
+import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
 
 
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
+    private RssPresenter presenter;
     private List<RssItem> items;
 
-    public RssAdapter(List<RssItem> items) {
+    public RssAdapter(RssPresenter presenter, List<RssItem> items) {
+        this.presenter = presenter;
         this.items = items;
     }
 
@@ -35,9 +38,9 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
     @Override
     public void onBindViewHolder(RssViewHolder customViewHolder, int i) {
         ListItemRssBinding viewDataBinding = customViewHolder.getViewDataBinding();
+        viewDataBinding.setPresenter(presenter);
         viewDataBinding.setRssItem(items.get(i));
         if (items.get(i).getImageUrl() != null) {
-            System.out.println("items.get(i).getImageUrl() = " + items.get(i).getImageUrl());
             viewDataBinding.image.setImageURI(items.get(i).getImageUrl());
         }
     }

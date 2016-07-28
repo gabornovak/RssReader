@@ -1,52 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="rssItem"
             type="hu.gabornovak.rssreader.logic.model.RssItem" />
+
+        <variable
+            name="presenter"
+            type="hu.gabornovak.rssreader.logic.presenter.RssPresenter" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="false"
+        android:onClick="@{() -> presenter.onRssItemClick(rssItem)}">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/image"
-            android:layout_margin="16dp"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            fresco:fadeDuration="300"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             fresco:actualImageScaleType="focusCrop"
-            fresco:placeholderImage="@color/image_wait_color"
-            fresco:placeholderImageScaleType="fitCenter"
+            fresco:backgroundImage="@color/image_wait_color"
+            fresco:fadeDuration="300"
             fresco:failureImage="@drawable/ic_error_48dp"
             fresco:failureImageScaleType="centerInside"
-            fresco:backgroundImage="@color/image_wait_color"
-            />
+            fresco:placeholderImage="@color/image_wait_color"
+            fresco:placeholderImageScaleType="fitCenter" />
 
         <TextView
             android:id="@+id/title"
-            android:text="@{rssItem.title}"
-            android:layout_toRightOf="@id/image"
-            android:layout_toEndOf="@id/image"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"/>
+            android:background="#6000"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:padding="12dp"
+            android:shadowColor="#9000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="@{rssItem.title}"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/description"
-            android:text="@{rssItem.description}"
-            android:layout_toRightOf="@id/image"
-            android:layout_toEndOf="@id/image"
-            android:layout_below="@id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:maxLines="3"
-            android:layout_marginRight="16dp"/>
+            android:layout_alignBottom="@id/image"
+            android:background="#6000"
+            android:ellipsize="end"
+            android:maxLines="4"
+            android:padding="12dp"
+            android:shadowColor="#9000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="1"
+            android:text="@{rssItem.description}"
+            android:textColor="#eee"
+            android:textSize="12sp" />
     </RelativeLayout>
 </layout>
