@@ -30,8 +30,8 @@ dependencies {
 
     compile 'com.crazyhitty.chdev.ks:rss-manager:0.23'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.facebook.fresco:fresco:0.12.0'
 
     compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha4'
     testCompile 'junit:junit:4.12'
 }

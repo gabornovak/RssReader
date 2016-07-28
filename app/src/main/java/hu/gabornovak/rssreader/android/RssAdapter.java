@@ -36,6 +36,10 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
     public void onBindViewHolder(RssViewHolder customViewHolder, int i) {
         ListItemRssBinding viewDataBinding = customViewHolder.getViewDataBinding();
         viewDataBinding.setRssItem(items.get(i));
+        if (items.get(i).getImageUrl() != null) {
+            System.out.println("items.get(i).getImageUrl() = " + items.get(i).getImageUrl());
+            viewDataBinding.image.setImageURI(items.get(i).getImageUrl());
+        }
     }
 
     static class RssViewHolder extends RecyclerView.ViewHolder {
@@ -43,7 +47,6 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
 
         RssViewHolder(ListItemRssBinding viewDataBinding) {
             super(viewDataBinding.getRoot());
-
             this.viewDataBinding = viewDataBinding;
             this.viewDataBinding.executePendingBindings();
         }

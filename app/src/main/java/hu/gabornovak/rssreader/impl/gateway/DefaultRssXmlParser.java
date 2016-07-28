@@ -87,7 +87,7 @@ public class DefaultRssXmlParser implements RssXmlParser {
                 case "pubDate":
                     pubDate = readPubDate(parser);
                     break;
-                case "encloser":
+                case "enclosure":
                     imageUrl = readEnclosure(parser);
                     break;
                 default:

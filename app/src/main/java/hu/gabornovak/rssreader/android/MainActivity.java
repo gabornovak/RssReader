@@ -65,8 +65,12 @@ public class MainActivity extends AppCompatActivity implements RssView {
 
     @Override
     public void showRssList(final List<RssItem> items) {
-        RssAdapter rssAdapter = new RssAdapter(items);
-        System.out.println("items = " + items.size());
-        binding.recycleView.setAdapter(rssAdapter);
+        final RssAdapter rssAdapter = new RssAdapter(items);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                binding.recycleView.setAdapter(rssAdapter);
+            }
+        });
     }
 }
