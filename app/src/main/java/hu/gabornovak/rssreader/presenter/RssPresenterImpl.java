@@ -31,15 +31,22 @@ public class RssPresenterImpl implements RssPresenter {
 
     @Override
     public void onResume() {
+
+    }
+
+    @Override
+    public void onStart() {
+        rssView.showProgress();
         rssInteractor.downloadRss(context, new RssParser.OnRssLoadedListener() {
             @Override
             public void onRssLoaded(List<RssItem> items) {
-
+                rssView.hideProgress();
+                rssView.showRssList(items);
             }
 
             @Override
             public void onError(Exception e) {
-
+                rssView.hideProgress();
             }
         });
     }

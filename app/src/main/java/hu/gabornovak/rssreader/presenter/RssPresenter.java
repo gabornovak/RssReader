@@ -10,5 +10,7 @@ public interface RssPresenter {
     void setView(RssView view);
 
     void onResume();
+    void onStart();
     void onDestroy();
+
 }
