@@ -20,6 +20,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
+ * Gateway to get every information about the RSS feed
+ *
  * Created by gnovak on 7/26/2016.
  */
 

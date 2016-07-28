@@ -11,6 +11,11 @@ import hu.gabornovak.rssreader.logic.model.RssItem;
 import hu.gabornovak.rssreader.logic.plugin.PrefsPlugin;
 
 /**
+ * Simple plugin to store the visited RSS items' ids in the SharedPreferences
+ *
+ * NOTE: It should not use the SharedPref, because it's not the best way to do it
+ * please refactor in the future to use DB.
+ *
  * Created by gnovak on 7/28/2016.
  */
 
