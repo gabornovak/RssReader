@@ -1,4 +1,4 @@
-package hu.gabornovak.rssreader;
+package hu.gabornovak.rssreader.android;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -7,11 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.List;
 
+import hu.gabornovak.rssreader.R;
 import hu.gabornovak.rssreader.databinding.ActivityMainBinding;
-import hu.gabornovak.rssreader.model.RssItem;
-import hu.gabornovak.rssreader.presenter.RssPresenter;
-import hu.gabornovak.rssreader.presenter.RssPresenterImpl;
-import hu.gabornovak.rssreader.view.RssView;
+import hu.gabornovak.rssreader.logic.model.RssItem;
+import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
+import hu.gabornovak.rssreader.impl.presenter.RssPresenterImpl;
+import hu.gabornovak.rssreader.logic.view.RssView;
 
 public class MainActivity extends AppCompatActivity implements RssView {
     private RssPresenter presenter;

@@ -1,6 +1,6 @@
-package hu.gabornovak.rssreader.presenter;
+package hu.gabornovak.rssreader.logic.presenter;
 
-import hu.gabornovak.rssreader.view.RssView;
+import hu.gabornovak.rssreader.logic.view.RssView;
 
 /**
  * Created by gnovak on 7/26/2016.

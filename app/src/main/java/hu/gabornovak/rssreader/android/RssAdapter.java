@@ -1,4 +1,4 @@
-package hu.gabornovak.rssreader;
+package hu.gabornovak.rssreader.android;
 
 /**
  * Created by gnovak on 7/28/2016.
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import hu.gabornovak.rssreader.databinding.ListItemRssBinding;
-import hu.gabornovak.rssreader.model.RssItem;
+import hu.gabornovak.rssreader.logic.model.RssItem;
 
 
 public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {

@@ -1,8 +1,8 @@
-package hu.gabornovak.rssreader.view;
+package hu.gabornovak.rssreader.logic.view;
 
 import java.util.List;
 
-import hu.gabornovak.rssreader.model.RssItem;
+import hu.gabornovak.rssreader.logic.model.RssItem;
 
 /**
  * Created by gnovak on 7/26/2016.
