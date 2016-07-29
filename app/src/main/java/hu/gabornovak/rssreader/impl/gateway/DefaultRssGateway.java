@@ -55,7 +55,7 @@ public class DefaultRssGateway implements RssGateway {
     private void filterForSearch(List<RssItem> rssItems, String searchText) {
         List<RssItem> toRemove = new ArrayList<>();
         for (RssItem rssItem : rssItems) {
-            if (!containIgnoreCase(searchText, rssItem)) {
+            if (!containsIgnoreCase(searchText, rssItem)) {
                 toRemove.add(rssItem);
             }
         }
@@ -64,7 +64,7 @@ public class DefaultRssGateway implements RssGateway {
         }
     }
 
-    private boolean containIgnoreCase(String searchText, RssItem rssItem) {
+    private boolean containsIgnoreCase(String searchText, RssItem rssItem) {
         return rssItem.getTitle().toLowerCase(Locale.getDefault()).contains(searchText.toLowerCase(Locale.getDefault()));
     }
 

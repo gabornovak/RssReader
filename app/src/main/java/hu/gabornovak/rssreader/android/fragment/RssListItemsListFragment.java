@@ -93,20 +93,26 @@ public class RssListItemsListFragment extends Fragment implements RssListView {
         }
     }
 
-    @Override
-    public void showError(final String s) {
+    public void showError(final String s, final boolean showRetry) {
         if (getActivity() != null) {
             binding.swipeRefreshLayout.setRefreshing(false);
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     binding.errorText.setText(s);
+                    binding.retryText.setVisibility(showRetry ? View.VISIBLE : View.GONE);
                     binding.progressBar.setVisibility(View.GONE);
                     binding.errorLayout.setVisibility(View.VISIBLE);
                     binding.recycleView.setVisibility(View.GONE);
                 }
             });
         }
+
+    }
+
+    @Override
+    public void showError(final String s) {
+        showError(s, true);
     }
 
     @Override
@@ -115,13 +121,18 @@ public class RssListItemsListFragment extends Fragment implements RssListView {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    binding.progressBar.setVisibility(View.GONE);
-                    binding.errorLayout.setVisibility(View.GONE);
-                    binding.recycleView.setVisibility(View.VISIBLE);
-
-                    rssAdapter = new RssAdapter(presenter, items);
-                    binding.recycleView.setAdapter(rssAdapter);
                     binding.swipeRefreshLayout.setRefreshing(false);
+
+                    if (items.size() > 0) {
+                        binding.progressBar.setVisibility(View.GONE);
+                        binding.errorLayout.setVisibility(View.GONE);
+                        binding.recycleView.setVisibility(View.VISIBLE);
+
+                        rssAdapter = new RssAdapter(presenter, items);
+                        binding.recycleView.setAdapter(rssAdapter);
+                    } else {
+                        showError(getString(R.string.error_no_search_result), false);
+                    }
                 }
             });
         }

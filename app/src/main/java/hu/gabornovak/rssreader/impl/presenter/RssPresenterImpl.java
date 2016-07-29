@@ -54,6 +54,9 @@ public class RssPresenterImpl implements RssPresenter {
         String url = item.getLink();
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        builder.setStartAnimations(activity, R.anim.fade_in, R.anim.fade_out);
+        builder.setExitAnimations(activity, R.anim.fade_in, R.anim.fade_out);
+
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.launchUrl(activity, Uri.parse(url));
         setItemVisited(item);

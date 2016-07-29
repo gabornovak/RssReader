@@ -44,6 +44,7 @@
                 android:textSize="@dimen/error_text_size" />
 
             <TextView
+                android:id="@+id/retryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/retry_text_margin_top"
@@ -56,8 +57,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/retry_text_size"
                 android:layout_below="@+id/errorText"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/textView" />
+                android:layout_centerHorizontal="true" />
         </RelativeLayout>
     </RelativeLayout>
 </layout>
