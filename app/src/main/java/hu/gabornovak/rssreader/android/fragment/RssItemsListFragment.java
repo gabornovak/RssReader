@@ -64,7 +64,7 @@ public class RssItemsListFragment extends Fragment implements RssView {
     }
 
     private void initPresenter() {
-        presenter = new RssPresenterImpl(getContext());
+        presenter = new RssPresenterImpl(getActivity());
         presenter.setView(this);
     }
 

@@ -1,12 +1,13 @@
 package hu.gabornovak.rssreader.impl.presenter;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.app.Activity;
 import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 
 import java.util.List;
 
+import hu.gabornovak.rssreader.R;
 import hu.gabornovak.rssreader.impl.DefaultPluginProvider;
 import hu.gabornovak.rssreader.impl.gateway.DefaultRssGateway;
 import hu.gabornovak.rssreader.logic.interactor.RssInteractor;
@@ -19,14 +20,14 @@ import hu.gabornovak.rssreader.logic.view.RssView;
  */
 
 public class RssPresenterImpl implements RssPresenter {
-    private final Context context;
+    private final Activity activity;
 
     private RssView rssView;
     private final RssInteractor rssInteractor;
 
-    public RssPresenterImpl(Context context) {
+    public RssPresenterImpl(Activity activity) {
         rssInteractor = new RssInteractor();
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -47,15 +48,11 @@ public class RssPresenterImpl implements RssPresenter {
 
     @Override
     public void onRssItemClick(RssItem item) {
-        Uri uri = Uri.parse(item.getLink());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-        //TODO Handle the case when we have no browser
-        if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
-            context.startActivity(intent);
-            setItemVisited(item);
-        }
+        String url = item.getLink();
+        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+        builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary));
+        CustomTabsIntent customTabsIntent = builder.build();
+        customTabsIntent.launchUrl(activity, Uri.parse(url));
     }
 
     @Override
@@ -67,7 +64,7 @@ public class RssPresenterImpl implements RssPresenter {
     @Override
     public void searchRssFeed(String searchText) {
         rssView.showProgress();
-        rssInteractor.searchRssFeed(context, searchText, new DefaultRssGateway.OnRssLoadedListener() {
+        rssInteractor.searchRssFeed(activity, searchText, new DefaultRssGateway.OnRssLoadedListener() {
             @Override
             public void onRssLoaded(List<RssItem> items) {
                 rssView.showRssList(items);
@@ -81,13 +78,13 @@ public class RssPresenterImpl implements RssPresenter {
     }
 
     private void setItemVisited(RssItem item) {
-        DefaultPluginProvider.INSTANCE.getPrefsPlugin(context).setItemVisited(item);
+        DefaultPluginProvider.INSTANCE.getPrefsPlugin(activity).setItemVisited(item);
         item.setVisited(true);
         rssView.refreshList();
     }
 
     private void getRssFeed(boolean force) {
-        rssInteractor.getRssFeed(context, force, new DefaultRssGateway.OnRssLoadedListener() {
+        rssInteractor.getRssFeed(activity, force, new DefaultRssGateway.OnRssLoadedListener() {
             @Override
             public void onRssLoaded(List<RssItem> items) {
                 rssView.showRssList(items);
