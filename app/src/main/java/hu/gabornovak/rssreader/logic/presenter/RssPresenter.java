@@ -10,9 +10,11 @@ import hu.gabornovak.rssreader.logic.view.RssView;
 public interface RssPresenter {
     void setView(RssView view);
 
-    void onStart();
+    void fetchRssFeed();
     void onRefresh();
 
     void onRssItemClick(RssItem item);
     void onRetryClick();
+
+    void searchRssFeed(String searchText);
 }

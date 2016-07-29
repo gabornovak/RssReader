@@ -17,5 +17,6 @@ public interface RssGateway {
         void onError(Exception e);
     }
 
-    void parseRssFeed(Context context, final OnRssLoadedListener onRssLoadedListener);
+    void searchRssFeed(Context context, String searchText, OnRssLoadedListener onRssLoadedListener);
+    void getRssFeed(Context context, boolean force, OnRssLoadedListener onRssLoadedListener);
 }

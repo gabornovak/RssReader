@@ -49,6 +49,8 @@ public class RssAdapter extends RecyclerView.Adapter<RssAdapter.RssViewHolder> {
             matrix.setSaturation(0);
             ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
             viewDataBinding.image.setColorFilter(filter);
+        } else {
+            viewDataBinding.image.setColorFilter(new ColorMatrixColorFilter(new ColorMatrix()));
         }
 
         if (rssItem.getImageUrl() != null) {

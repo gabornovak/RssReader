@@ -35,14 +35,14 @@ public class RssPresenterImpl implements RssPresenter {
     }
 
     @Override
-    public void onStart() {
+    public void fetchRssFeed() {
         rssView.showProgress();
-        getRssFeed();
+        getRssFeed(false);
     }
 
     @Override
     public void onRefresh() {
-        getRssFeed();
+        getRssFeed(true);
     }
 
     @Override
@@ -61,7 +61,23 @@ public class RssPresenterImpl implements RssPresenter {
     @Override
     public void onRetryClick() {
         rssView.showProgress();
-        getRssFeed();
+        getRssFeed(true);
+    }
+
+    @Override
+    public void searchRssFeed(String searchText) {
+        rssView.showProgress();
+        rssInteractor.searchRssFeed(context, searchText, new DefaultRssGateway.OnRssLoadedListener() {
+            @Override
+            public void onRssLoaded(List<RssItem> items) {
+                rssView.showRssList(items);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                rssView.showError("TODO: Error msg");
+            }
+        });
     }
 
     private void setItemVisited(RssItem item) {
@@ -70,8 +86,8 @@ public class RssPresenterImpl implements RssPresenter {
         rssView.refreshList();
     }
 
-    private void getRssFeed() {
-        rssInteractor.downloadRss(context, new DefaultRssGateway.OnRssLoadedListener() {
+    private void getRssFeed(boolean force) {
+        rssInteractor.getRssFeed(context, force, new DefaultRssGateway.OnRssLoadedListener() {
             @Override
             public void onRssLoaded(List<RssItem> items) {
                 rssView.showRssList(items);

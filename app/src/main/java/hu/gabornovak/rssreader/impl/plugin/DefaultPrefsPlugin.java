@@ -26,8 +26,6 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
     private final SharedPreferences preferences;
     private final SharedPreferences.Editor editor;
 
-    private Set<String> cache;
-
     //Known issue, we call apply async
     @SuppressLint("CommitPrefEdits")
     public DefaultPrefsPlugin(Context context) {
@@ -35,42 +33,20 @@ public class DefaultPrefsPlugin implements PrefsPlugin {
         editor = preferences.edit();
     }
 
-    private void saveStringSet(Set<String> set) {
-        editor.putStringSet(VISITED_ITEMS_KEY, set).apply();
-    }
-
-    private Set<String> getStringSet() {
-        return preferences.getStringSet(VISITED_ITEMS_KEY, new HashSet<String>());
-    }
-
+    /**
+     * KNOWN ISSUE: https://developer.android.com/reference/android/content/SharedPreferences.html#getStringSet%28java.lang.String,%20java.util.Set%3Cjava.lang.String%3E%29
+     * SharedPref string set doesn't work properly if you want to save the same set back
+     */
     @Override
     public Set<String> getVisitedRssItems() {
-        if (cache != null) {
-            return cache;
-        } else {
-            cache = getStringSet();
-        }
-        return cache;
+        return new HashSet<>(preferences.getStringSet(VISITED_ITEMS_KEY, new HashSet<String>()));
     }
 
     //FIXME: We should remove the unused items
     @Override
     public void setItemVisited(RssItem item) {
-        if (cache != null) {
-            cache.add(item.getLink());
-        }
-        saveItemVisited(item);
-    }
-
-    private void saveItemVisited(RssItem item) {
-        Set<String> urls;
-        Set<String> set = getStringSet();
-        if (set == null) {
-            urls = new HashSet<>();
-        } else {
-            urls = set;
-        }
+        Set<String> urls = getVisitedRssItems();
         urls.add(item.getLink());
-        saveStringSet(urls);
+        editor.putStringSet(VISITED_ITEMS_KEY, urls).apply();
     }
 }
