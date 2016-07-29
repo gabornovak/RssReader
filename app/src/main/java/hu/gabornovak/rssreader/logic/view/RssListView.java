@@ -8,7 +8,7 @@ import hu.gabornovak.rssreader.logic.model.RssItem;
  * Created by gnovak on 7/26/2016.
  */
 
-public interface RssView {
+public interface RssListView {
     void showProgress();
     void showError(String s);
     void showRssList(List<RssItem> items);

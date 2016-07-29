@@ -19,13 +19,13 @@ import hu.gabornovak.rssreader.databinding.FragmentRssItemsListBinding;
 import hu.gabornovak.rssreader.impl.presenter.RssPresenterImpl;
 import hu.gabornovak.rssreader.logic.model.RssItem;
 import hu.gabornovak.rssreader.logic.presenter.RssPresenter;
-import hu.gabornovak.rssreader.logic.view.RssView;
+import hu.gabornovak.rssreader.logic.view.RssListView;
 
 /**
  * Created by gnovak on 7/29/2016.
  */
 
-public class RssItemsListFragment extends Fragment implements RssView {
+public class RssListItemsListFragment extends Fragment implements RssListView {
     protected RssPresenter presenter;
     private RssAdapter rssAdapter;
 
@@ -135,6 +135,6 @@ public class RssItemsListFragment extends Fragment implements RssView {
     }
 
     public static Fragment newInstance() {
-        return new RssItemsListFragment();
+        return new RssListItemsListFragment();
     }
 }

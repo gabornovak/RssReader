@@ -1,14 +1,14 @@
 package hu.gabornovak.rssreader.logic.presenter;
 
 import hu.gabornovak.rssreader.logic.model.RssItem;
-import hu.gabornovak.rssreader.logic.view.RssView;
+import hu.gabornovak.rssreader.logic.view.RssListView;
 
 /**
  * Created by gnovak on 7/26/2016.
  */
 
 public interface RssPresenter {
-    void setView(RssView view);
+    void setView(RssListView view);
 
     void fetchRssFeed();
     void onRefresh();

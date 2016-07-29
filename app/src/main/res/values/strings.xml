@@ -4,4 +4,8 @@
     <string name="search_text">Search</string>
     <string name="search_activity_title">Search \"%s\"</string>
     <string name="search_hint">Search in rss feed</string>
+    <string name="error_text_xml_parser">Something went wrong during the data parsing.\nPlease try again.</string>
+    <string name="error_text_no_network">Something went wrong during the network request.\nPlease try again.</string>
+    <string name="error_text_default">Something went wrong.\nPlease try again.</string>
+    <string name="error_no_search_result">Sorry, but we found nothing…</string>
 </resources>

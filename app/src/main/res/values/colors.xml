@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#134580</color>
     <color name="colorAccent">#ee293d</color>
     <color name="image_wait_color">#bbb</color>
+    <color name="mainBackground">#eee</color>
 </resources>

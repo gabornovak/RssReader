@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
-        android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -30,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
+            android:background="@color/mainBackground"
             android:visibility="gone">
 
             <TextView
@@ -37,16 +37,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text=""
-                android:textSize="16sp" />
+                android:layout_marginLeft="@dimen/error_text_horizontal_margin"
+                android:layout_marginRight="@dimen/error_text_horizontal_margin"
+                android:text="@string/error_text_xml_parser"
+                android:gravity="center"
+                android:textSize="@dimen/error_text_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/retry_text_margin_top"
+                android:alpha="0.5"
+                android:drawableLeft="@drawable/ic_refresh_24dp"
+                android:drawablePadding="@dimen/retry_text_drawable_padding"
+                android:drawableStart="@drawable/ic_refresh_24dp"
+                android:gravity="center"
+                android:text="@string/retry"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/retry_text_size"
                 android:layout_below="@+id/errorText"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="12dp"
-                android:text="@string/retry" />
+                android:id="@+id/textView" />
         </RelativeLayout>
     </RelativeLayout>
 </layout>

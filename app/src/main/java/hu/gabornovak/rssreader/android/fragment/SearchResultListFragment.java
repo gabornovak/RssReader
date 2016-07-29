@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
  * Created by gnovak on 7/29/2016.
  */
 
-public class SearchResultListFragment extends RssItemsListFragment {
+public class SearchResultListFragment extends RssListItemsListFragment {
     private static final String ARG_SEARCH_TEXT = "search text";
 
     public static Fragment newInstance(String searchText) {

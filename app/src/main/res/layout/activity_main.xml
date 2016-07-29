@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/mainBackground">
 
     <fragment
         android:id="@+id/fragment"
+        android:name="hu.gabornovak.rssreader.android.fragment.RssListItemsListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="hu.gabornovak.rssreader.android.fragment.RssItemsListFragment"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>

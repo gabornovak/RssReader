@@ -7,4 +7,23 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/errorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@color/mainBackground"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/error_text_horizontal_margin"
+            android:layout_marginRight="@dimen/error_text_horizontal_margin"
+            android:gravity="center"
+            android:text="@string/error_no_search_result"
+            android:textSize="@dimen/error_text_size" />
+    </RelativeLayout>
 </RelativeLayout>
