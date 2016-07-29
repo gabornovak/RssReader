@@ -53,6 +53,7 @@ public class RssPresenterImpl implements RssPresenter {
         builder.setToolbarColor(ContextCompat.getColor(activity, R.color.colorPrimary));
         CustomTabsIntent customTabsIntent = builder.build();
         customTabsIntent.launchUrl(activity, Uri.parse(url));
+        setItemVisited(item);
     }
 
     @Override
